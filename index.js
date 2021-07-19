@@ -4,6 +4,10 @@ const cors = require('cors');
 const axios = require('axios')
 const app = express();
 var multer  = require('multer')
+var fs =require('fs')
+const path = require('path');
+var FormData = require('form-data');
+// const base64_decode = require("base64_decode")
 var router = express.Router();
 //use cors to allow cross origin resource sharing
 var auth = 'Basic ' + Buffer.from("AIY3H1XS5APT2EMFE54UWZ56IQ8FPKFP" + ':' + "GO75FW2YAZ6KQM3F1ZSGQVUQCZPXD6OF").toString('base64');
@@ -43,16 +47,31 @@ app.get('/home', function(req, res) {
 
 // PAN OCR
 app.post('/panocr',function(req,res){
+
+let base64String = req.body.front_part
+let base64Image = base64String.split(';base64,').pop();
+fs.writeFile('image.png', base64Image, {encoding: 'base64'}, function(err) {
+});
+
+fs.readFile('/image.png', (err, data) => {
+  console.log(data)
+ })
+var content = fs.readFileSync('./image.png');
   const panocrdata ={
-    front_part :req.body.front_part
+    front_part : content
   }
   axios.post('https://ext.digio.in:444/v3/client/kyc/analyze/file/idcard',panocrdata, axiosConfigurationOrc)
 .then((res)=>{
   console.log("Response",res)
+   console.log("SUCCESS ORC VERIFY")
+          res.send(res)
 })
 .catch((err)=>{
   console.log('Error',err)
+   console.log("Failed VERIFY")
+          res.send(err)
 })
+ books.push(panocrdata)
 })
 
 // for bank
