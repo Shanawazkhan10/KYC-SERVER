@@ -10,7 +10,7 @@
   "author": "shanawaz",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "base64-img": "^1.0.4",
     "base64-to-image": "^1.0.2",
     "cookie-parser": "^1.4.5",

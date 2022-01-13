@@ -123,7 +123,44 @@ app.post('/create', function(req, res) {
   books.push(dataToPost);
 
 });
+app.post('/createData', function(req, res) {
 
+  
+var config = {
+  method: 'get',
+  url: 'http://localhost:8085/api/TradeDetail',
+  headers: { }
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+  res.send(response.data);
+})
+.catch(function (error) {
+  console.log(error);
+});
+
+});
+// Leadger API
+app.post('/LedgerDetails', function(req, res) {
+
+var config = {
+  method: 'get',
+  url: 'http://localhost:8085/api/Ledger',
+  headers: { }
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+  res.send(response.data);
+})
+.catch(function (error) {
+  console.log(error);
+});
+
+});
 //start your server on port 3001
 app.listen(3001, () => {
   console.log('Server Listening on port 3001');
